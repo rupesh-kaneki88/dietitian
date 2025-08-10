@@ -68,7 +68,7 @@ const ClientMenuPage = () => {
 
   return (
     <div className="p-10 pt-20 text-white bg-[#121212] min-h-screen">
-      <h1 className="mb-6 text-4xl font-bold text-center md:text-left">{menu.client.name}'s Menu</h1>
+      <h1 className="mb-6 text-4xl font-bold text-center md:text-left">{menu.client.name}&apos;s Menu</h1>
 
       <div ref={menuRef} className="grid grid-cols-1 md:grid-cols-3 gap-10">
         <div className="md:col-span-1">

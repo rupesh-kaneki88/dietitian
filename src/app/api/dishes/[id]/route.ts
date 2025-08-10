@@ -3,11 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 import Dish from '@/models/Dish';
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
   await dbConnect();
 
   try {
-    const { id } = await params;
     const { name, recipe } = await req.json();
 
     const updatedDish = await Dish.findByIdAndUpdate(id, { name, recipe }, { new: true, runValidators: true });
@@ -25,12 +25,11 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
   await dbConnect();
 
   try {
-    const { id } = await params;
-
     const deletedDish = await Dish.findByIdAndDelete(id);
 
     if (!deletedDish) {

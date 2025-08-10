@@ -3,11 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 import Menu from '@/models/Menu';
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
   await dbConnect();
 
   try {
-    const { id } = await params;
     const { client, dishes } = await req.json();
 
     const updatedMenu = await Menu.findByIdAndUpdate(id, { client, dishes }, { new: true, runValidators: true });
@@ -25,12 +25,11 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
   await dbConnect();
 
   try {
-    const { id } = await params;
-
     const deletedMenu = await Menu.findByIdAndDelete(id);
 
     if (!deletedMenu) {
