@@ -24,7 +24,7 @@ const Navbar = () => {
     <nav className="bg-[#1e1e1e] p-4 shadow-md flex justify-between items-center fixed w-full z-50">
       <div className="flex items-center">
         <Link href="/" className="text-white text-2xl font-bold">
-          Dietitian App
+          Dietitian Bitch :/
         </Link>
         <div className="hidden md:flex ml-8">
           <Link href="/" className="text-white text-lg mr-4 hover:text-blue-400 transition-colors duration-300">
